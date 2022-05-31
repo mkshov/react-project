@@ -1,16 +1,17 @@
+import './App.css'
 import React from "react";
+import Routing from "./Routing";
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
-import Routing from "./Routing";
-import './App.css'
+import ProductsContextProvider from "./Contexts/productsContext";
 
 function App() {
   return (
-    <div>
+    <ProductsContextProvider>
       <Header />
       <Routing />
       <Footer />
-    </div>
+    </ProductsContextProvider>
   );
 }
 
