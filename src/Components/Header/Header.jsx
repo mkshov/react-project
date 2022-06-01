@@ -120,8 +120,8 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
+        <IconButton size="large" aria-label="show 12 new mails" color="inherit">
+          <Badge badgeContent={12} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -187,7 +187,7 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={12} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>

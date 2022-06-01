@@ -1,5 +1,6 @@
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import { Box, Breadcrumbs, Button, Container, Link, TextField, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { productsContext } from '../../Contexts/productsContext';
 
 
@@ -7,6 +8,7 @@ import { productsContext } from '../../Contexts/productsContext';
 const AddProductForm = () => {
     const {createProduct} = useContext(productsContext)
     // console.log(createProduct);
+    const navigate = useNavigate()
     const [title, setTitle] = useState('')
     const [description,setDescription] = useState('')
     const [price,setPrice] = useState('')
@@ -18,12 +20,29 @@ const AddProductForm = () => {
             price,
             image
         }
+        if(!title.trim() || !description.trim() || !price.trim() || !image.trim()){
+            alert('ЗАПОЛНИТЕ ПОЛЯ!')
+            return
+        }
         createProduct(newProduct)
+        navigate(`/products`)
         // console.log(newProduct);
     }
 
     return (
         <Container maxWidth="sm">
+                                    <Breadcrumbs aria-label="breadcrumb">
+                         <Link underline="hover" color="inherit" href="/">
+                    Shop
+                </Link>
+                <Link
+                    underline="hover"
+                    color="inherit"
+                    href="/products">
+                Products
+                </Link>
+            <Typography color="text.primary">Add product</Typography>
+            </Breadcrumbs>
              <Box display={'flex'} justifyContent={'center'} flexDirection={'column'} padding={'30px'} textAlign={'center'}>
              <Typography variant="h4" component="h2">Add new product</Typography>
                  <TextField value={title} onChange={(e) => setTitle(e.target.value)} style={{margin: '10px'}} id="standard-basic" label="Title" variant="standard" />
