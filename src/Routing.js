@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AddProductForm from "./Components/AddProductForm/AddProductForm";
+import Cart from "./Components/Cart/Cart";
 import EditProductForm from "./Components/EditProductForm/EditProductForm";
 import LoginForm from "./Components/LoginForm/LoginForm";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
@@ -18,6 +19,8 @@ const Routing = () => {
         <Route path="/products" element={<ProductsList />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/edit/:id" element={<EditProductForm />} />
+        <Route path="/cart" element={<Cart />} />
+
       </Routes>
     </BrowserRouter>
   );
