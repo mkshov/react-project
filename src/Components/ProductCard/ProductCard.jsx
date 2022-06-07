@@ -2,20 +2,20 @@ import {
   Button,
   Card,
   CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
-import React, { useContext } from "react";
+  CardContent,CardMedia,Typography,} from "@mui/material";
+import React, { useContext, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { productsContext } from "../../Contexts/productsContext";
+import { cartContext } from "../../Contexts/cartContext";
 
 const ProductCard = ({ item }) => {
   const { deleteProduct } = useContext(productsContext);
+  const { AddProductToCart, checkProductInCart } = useContext(cartContext);
+  const [checkProduct, setCheckProduct] = useState(checkProductInCart(item))
   const navigate = useNavigate();
   // console.log(item);
   return (
@@ -53,8 +53,11 @@ const ProductCard = ({ item }) => {
           size="small">
           <EditIcon />
         </Button>
-        <Button size="small">
-          <ShoppingCartIcon />
+        <Button onClick={() => {
+          AddProductToCart(item)
+          setCheckProduct(checkProductInCart(item))
+        }} size="small">
+          <ShoppingCartIcon color={checkProduct ? "success" : "primary"} />
         </Button>
         <Button onClick={() => navigate(`/products/${item.id}`)} size="small">
           <MoreVertIcon />

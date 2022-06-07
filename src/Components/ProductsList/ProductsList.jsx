@@ -5,9 +5,11 @@ import { Box, Container } from "@mui/system";
 import { Button, Pagination } from "@mui/material";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Filters from "../Filters/Filters";
+import { authContext } from "../../Contexts/authContext";
 
 const ProductsList = () => {
   const { getProducts, products, pages } = useContext(productsContext);
+  const {currentUser} = useContext(authContext)
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState(
@@ -34,11 +36,16 @@ const ProductsList = () => {
   //   console.log(window.location.search);
   return (
     <Container>
+      
       <Button
         variant="outlined"
         style={{ margin: "30px" }}
-        onClick={() => navigate(`/add-product`)}>
-        Add product
+        onClick={() => { if(currentUser){
+          navigate(`/add-product`)
+        } else{
+        alert("Вы не авторизованы!")
+        return}
+        }}>Add product
       </Button>
       <Filters
         search={search}

@@ -5,6 +5,7 @@ export const authContext = React.createContext()
 
 const AuthContextProvider = ({children}) => {
   const [currentUser, setCurrentUser] = useState('')
+  // console.log(currentUser);
   const [error, setError] = useState('')
 
   function signUp(email,password, navigate){
@@ -32,7 +33,7 @@ const AuthContextProvider = ({children}) => {
       }
     })
   }
-  // console.log(currentUser);
+  console.log(currentUser);
   useEffect(authListener, [])
 
   return (<authContext.Provider value={{currentUser, error, signUp, login, logOut}}>{children}</authContext.Provider>)

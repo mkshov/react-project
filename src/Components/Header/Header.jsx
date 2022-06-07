@@ -1,11 +1,9 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -62,28 +60,15 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}>
         {currentUser ? (<MenuItem onClick={handleMenuClose}>{currentUser.email}</MenuItem>) : null}
-      {currentUser ? (
-        <MenuItem
-          onClick={() => {
-            handleMenuClose();
-            logOut();
-          }}
-        >
-          Log out
-        </MenuItem>
-      ) : (
-        <Link href="/login">
+      {currentUser ? (         
           <MenuItem
             onClick={() => {
               handleMenuClose();
-            }}
-          >
-            Log in
-          </MenuItem>
-        </Link>
-      )}
-    </Menu>
-  );
+              logOut()}}>Log out</MenuItem>) : (
+              <Link href="/login">
+          <MenuItem onClick={() => {handleMenuClose()}}>Log in</MenuItem>
+        </Link>)}
+  </Menu>);
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
