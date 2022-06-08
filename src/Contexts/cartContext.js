@@ -72,18 +72,44 @@ function AddProductToCart (product){
       totalPrice: 0
     }
   }
+  cart.totalPrice = cart.products.reduce((prev,curr) => prev + curr.subPrice, 0)
   dispatch({
     type: "GET_CART", 
     payload: cart})
  }
 //  console.log(stxate.count);
+function changeProductCount(count, id){
+  if(count <= 0){
+    count = 1
+  }
+  let cart = JSON.parse(localStorage.getItem("cart")) 
+  cart.products = cart.products.map((item) => {
+    if(item.item.id === id){
+      item.count = count
+      item.subPrice = count * item.item.price
+    }
+    return item
+  } )
+  localStorage.setItem("cart", JSON.stringify(cart))
+  getCart()
+}
+
+function deleteFromCart(id){
+  let cart = JSON.parse(localStorage.getItem("cart")) 
+  cart.products = cart.products.filter((item) => item.item.id !== id)
+  localStorage.setItem("cart", JSON.stringify(cart))
+  getCart()
+
+}
 
   return (<cartContext.Provider value={{
     cart: state.cart,
     count: state.count,
     AddProductToCart,
     checkProductInCart,
-    getCart
+    getCart,
+    changeProductCount,
+    deleteFromCart
   }}>{children}</cartContext.Provider>)
 }
 export default CartContextProvider

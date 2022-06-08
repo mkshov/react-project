@@ -24,6 +24,12 @@ const LoginForm = () => {
             <TextField value={password} onChange={(e) => setPassword(e.target.value)} style={{width:'40%', margin: '10px'}}  id="outlined-basic" label="Password" variant="outlined" />
             {error ? (<Alert style={{ marginBottom: '10px'}} severity="error">{error}</Alert>) : null}
             <Button style={{width: "40%"}} variant="contained" onClick={handleValues}>Login</Button>
+            <Typography variant="h6" component="h2">
+        Don't have an account?
+      </Typography>
+      <Typography onClick={() => navigate(`/register`)} variant="h6" color={"primary"} style={{cursor: 'pointer'}} component="h2">
+        Sign up
+      </Typography>
         </Box>
     );
 };

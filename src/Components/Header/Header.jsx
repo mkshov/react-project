@@ -15,7 +15,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { authContext } from "../../Contexts/authContext";
 // import { Link } from "@mui/material";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { cartContext } from "../../Contexts/cartContext";
 import { useEffect, useContext } from "react";
@@ -27,6 +27,7 @@ export default function PrimarySearchAppBar() {
   useEffect(() => {getCart()}, [])
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const navigate = useNavigate()
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -128,20 +129,35 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}>
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}>
-            MUI
+            // display={{xs: 'none', sm: 'block'}}
+            marginRight={'30px'}
+            sx={{ display: { xs: "none", sm: "block" } }}
+            onClick={() => navigate(`/`)}
+            style={{cursor: 'pointer'}}>
+            HOME
+          </Typography>
+          <Typography
+            marginRight={'30px'}
+            variant="h6"
+            noWrap
+            component="div"
+            // display={{xs: 'none', sm: 'block'}}
+            sx={{ display: { xs: "none", sm: "block" } }}
+            onClick={() => navigate(`/products`)}
+            style={{cursor: 'pointer'}}>
+            PRODUCTS
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
