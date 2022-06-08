@@ -65,7 +65,7 @@ const ProductsList = () => {
       <Box display={"flex"} justifyContent={"center"}>
         <Pagination
           page={page}
-          count={pages}
+          count={isNaN(pages) ? 0 : pages}
           variant="outlined"
           shape="rounded"
           onChange={(e, value) => setPage(value)}

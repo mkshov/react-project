@@ -57,7 +57,7 @@ const ProductCard = ({ item }) => {
           AddProductToCart(item)
           setCheckProduct(checkProductInCart(item))
         }} size="small">
-          <ShoppingCartIcon color={checkProduct ? "success" : "primary"} />
+          <ShoppingCartIcon color={checkProduct ? "secondary" : "primary"} />
         </Button>
         <Button onClick={() => navigate(`/products/${item.id}`)} size="small">
           <MoreVertIcon />

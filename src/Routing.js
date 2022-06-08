@@ -10,7 +10,7 @@ import RegisterForm from "./Components/RegisterForm/RegisterForm";
 
 const Routing = () => {
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
       <Routes>
         <Route path="/" element={<ProductsList />} />
         <Route path="/login" element={<LoginForm />} />
@@ -22,7 +22,7 @@ const Routing = () => {
         <Route path="/cart" element={<Cart />} />
 
       </Routes>
-    </BrowserRouter>
+    // </BrowserRouter>
   );
 };
 

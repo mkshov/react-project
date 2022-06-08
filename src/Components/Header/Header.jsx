@@ -14,12 +14,17 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { authContext } from "../../Contexts/authContext";
-import { Link } from "@mui/material";
+// import { Link } from "@mui/material";
+import {Link} from "react-router-dom";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { cartContext } from "../../Contexts/cartContext";
+import { useEffect, useContext } from "react";
 
 export default function PrimarySearchAppBar() {
-  const {currentUser, logOut} = React.useContext(authContext)
+  const {currentUser, logOut} = useContext(authContext)
   // console.log(currentUser)
+  const {count, getCart} = useContext(cartContext)
+  useEffect(() => {getCart()}, [])
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -65,7 +70,7 @@ export default function PrimarySearchAppBar() {
             onClick={() => {
               handleMenuClose();
               logOut()}}>Log out</MenuItem>) : (
-              <Link href="/login">
+              <Link to="/login">
           <MenuItem onClick={() => {handleMenuClose()}}>Log in</MenuItem>
         </Link>)}
   </Menu>);
@@ -141,14 +146,16 @@ export default function PrimarySearchAppBar() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <Link to='/cart'>
             <IconButton
               size="large"
               aria-label="show 4 new mails"
               color="inherit">
-              <Badge badgeContent={12} color="error">
+              <Badge badgeContent={count} color="error">
               <AddShoppingCartIcon />
               </Badge>
             </IconButton>
+            </Link>
             <IconButton
               size="large"
               edge="end"
