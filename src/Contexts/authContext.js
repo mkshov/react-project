@@ -7,6 +7,7 @@ const AuthContextProvider = ({children}) => {
   const [currentUser, setCurrentUser] = useState('')
   // console.log(currentUser);
   const [error, setError] = useState('')
+  const [isAdmin, setIsAdmin] = useState(false)
 
   function signUp(email,password, navigate){
     fire.auth().createUserWithEmailAndPassword(email,password)
@@ -27,15 +28,22 @@ const AuthContextProvider = ({children}) => {
   function authListener (){
     fire.auth().onAuthStateChanged((user) => {
       if(user){
+        //login : admin@gmail.com password: 1234567
+        // console.log(user.email)
+        if(user.email === "admin@gmail.com"){
+          setIsAdmin(true)
+        }
         setCurrentUser(user)
       }else{
         setCurrentUser("")
+        setIsAdmin(false)
       }
     })
   }
-  console.log(currentUser);
+  // console.log(currentUser);
+  // console.log(isAdmin)
   useEffect(authListener, [])
 
-  return (<authContext.Provider value={{currentUser, error, signUp, login, logOut}}>{children}</authContext.Provider>)
+  return (<authContext.Provider value={{currentUser, error, isAdmin, signUp, login, logOut}}>{children}</authContext.Provider>)
 }
 export default AuthContextProvider;

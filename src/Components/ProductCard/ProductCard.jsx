@@ -11,9 +11,11 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { productsContext } from "../../Contexts/productsContext";
 import { cartContext } from "../../Contexts/cartContext";
+import { authContext } from "../../Contexts/authContext";
 
 const ProductCard = ({ item }) => {
   const { deleteProduct } = useContext(productsContext);
+  const {isAdmin} = useContext(authContext)
   const { AddProductToCart, checkProductInCart } = useContext(cartContext);
   const [checkProduct, setCheckProduct] = useState(checkProductInCart(item))
   const navigate = useNavigate();
@@ -41,7 +43,8 @@ const ProductCard = ({ item }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button
+        {isAdmin ? <>
+          <Button
           color="error"
           onClick={() => deleteProduct(item.id)}
           size="small">
@@ -53,6 +56,7 @@ const ProductCard = ({ item }) => {
           size="small">
           <EditIcon />
         </Button>
+        </> : null}
         <Button onClick={() => {
           AddProductToCart(item)
           setCheckProduct(checkProductInCart(item))
